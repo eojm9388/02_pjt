@@ -1,4 +1,5 @@
 # Project 2
+## 금융
 
 ## `csv`파일 불러와서 `numpy`와 `pandas`로 데이터 처리
 
@@ -106,3 +107,12 @@ new_data
 ```python
 plt.xticks(rotation=45)
 ```
+
+
+## 영화
+
+### 알라딘 Open api
+
+`Query`: 검색할려는 것 ex) 작가이름
+
+`문자열.find('문자열')`: 찾는 문자열의 인덱스를 반환해줌

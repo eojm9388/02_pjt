@@ -3,8 +3,42 @@ from pprint import pprint
 
 
 def author_other_works(title):
-    # 여기에 코드를 작성합니다.
-    pass
+    URL = 'http://www.aladin.co.kr/ttb/api/ItemSearch.aspx'
+    book_list = []
+    params = {
+        'ttbkey': '알라딘api',
+        'Query': title,
+        'QueryType': 'title',
+        'MaxResults': 20,
+        'start': 1,
+        'SearchTarget': 'Book',
+        'output': 'js',
+        'Version': '20131101',
+    }
+
+    response = requests.get(URL, params=params).json()
+    if response.get('item') == []:
+        return None
+    else:
+        author = response.get('item')[0].get('author')
+        author_index = author.find('(지은이)')
+
+
+    URL = 'http://www.aladin.co.kr/ttb/api/ItemSearch.aspx'
+
+    params['Query'] = author[:author_index]
+    params['QueryType'] = 'Author'
+    params['MaxResults'] = 5
+    
+    response_author = requests.get(URL, params=params).json()
+
+    for book in response_author.get('item'):
+        book_list.append(book.get('title'))
+    
+    return book_list
+
+
+
 
 
 # 아래의 코드는 수정하지 않습니다.
